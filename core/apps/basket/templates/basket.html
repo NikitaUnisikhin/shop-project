@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Каталог</title>
+    <title>Корзина</title>
 </head>
 <body>
     <h1>Товары:</h1>
     <ul>
-        {% for product in products %}
-        <li>{{ product }}</li>
+        {% for item in items %}
+        <li>{{ item }} {{ item.quantity }}</li>
         {% endfor %}
     </ul>
 </body>
