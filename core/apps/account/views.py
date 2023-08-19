@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as login_auth
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from core.apps.account.forms import UserRegisterForm
 
@@ -13,3 +16,8 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})
+
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <p>Логин (имя):<br> <input name="username" /></p>
+        <p>Пароль:<br> <input name="password" /></p>
+        <input type="submit" value="Авторизоваться" />
+    </form>
+</body>
+</html>
