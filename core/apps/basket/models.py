@@ -1,15 +1,10 @@
+from django.contrib.auth.models import User
 from django.db import models
 from core.apps.catalog.models import Product
 
 
-class Buyer(models.Model):
-    name = models.CharField(max_length=20)
-    surname = models.CharField(max_length=40)
-    email = models.EmailField()
-
-
 class Basket(models.Model):
-    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class BasketItem(models.Model):

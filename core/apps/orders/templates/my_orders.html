@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои заказы</title>
+</head>
+<body>
+    <ul>
+    {% for order, items in orders.items %}
+        <li>{{ order.order_time }} {{ order.delivery_address }}
+        {% for item in items %}
+            <br><a>{{ item.product.name }} {{ item.product.price }} {{ item.quantity }}</a>
+        {% endfor %}
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

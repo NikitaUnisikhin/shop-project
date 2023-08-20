@@ -23,13 +23,4 @@ class Migration(migrations.Migration):
                 ('buyer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='basket.buyer')),
             ],
         ),
-        migrations.CreateModel(
-            name='OrderItem',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantity', models.PositiveIntegerField()),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='orders.order')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='catalog.product')),
-            ],
-        ),
     ]

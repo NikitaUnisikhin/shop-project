@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы клиентов</title>
+</head>
+<body>
+    <ul>
+    {% for item in order_items %}
+        <li>{{ item.order.order_time }} {{ item.order.delivery_address }}  {{ item.product.name }} {{ item.product.price }} {{ item.quantity }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
