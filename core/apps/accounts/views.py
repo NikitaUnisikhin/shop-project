@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
-from core.apps.account.forms import UserRegisterForm
+from core.apps.accounts.forms import UserRegisterForm
 
 
 def register(request):

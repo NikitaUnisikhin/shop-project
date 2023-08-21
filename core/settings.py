@@ -27,8 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.catalog',
-    'core.apps.basket',
-    'core.apps.account',
+    'core.apps.cart',
+    'core.apps.accounts',
     'core.apps.orders'
 ]
 
@@ -119,5 +119,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/account/profile'
-LOGIN_URL = '/account/login'
+LOGIN_REDIRECT_URL = '/accounts/profile'
+LOGIN_URL = '/accounts/login'

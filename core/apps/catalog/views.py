@@ -9,7 +9,7 @@ def index(request):
 
 
 @login_required
-def creating_product(request):
+def create_product(request):
     if request.method == 'GET':
         return render(request, 'create_product.html')
     elif request.method == 'POST':
@@ -21,7 +21,8 @@ def creating_product(request):
         return HttpResponse("<h4>Товар добавлен!</h4>")
 
 
-def product(request, product_id):
+def product(request):
+    product_id = request.GET.get('product_id')
     if request.method == 'GET':
         return render(request, 'product.html', {'product': Product.objects.get(id=product_id)})
     elif request.method == 'DELETE':
