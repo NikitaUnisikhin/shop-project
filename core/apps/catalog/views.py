@@ -12,3 +12,11 @@ def products(request):
         many=True
     )
     return Response(serializer_for_queryset.data)
+
+@api_view(['GET'])
+def product_by_id(request, id):
+    queryset = Product.objects.get(id=id)
+    serializer_for_queryset = ProductSerializer(
+        instance=queryset,
+    )
+    return Response(serializer_for_queryset.data)

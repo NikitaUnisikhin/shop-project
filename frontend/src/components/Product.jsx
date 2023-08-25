@@ -1,14 +1,16 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 
 const Product = ({product}) => {
+    let router = useNavigate();
+
     return (
-        <div>
+        <div className="product" onClick={() => router(`/products/${product.id}`)}>
             <div>
                 <strong>{product.name}</strong>
-                <ul>
-                    <li>{product.price}</li>
-                    <li>{product.description}</li>
-                </ul>
+                <div>Продавец: {product.seller?.username} {product.seller?.email}</div>
+                <div>Цена: {product.price} руб.</div>
+                <div>Описание: {product.description}</div>
             </div>
         </div>
     )

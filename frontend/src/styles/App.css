@@ -1,0 +1,21 @@
+.product {
+    width: 80vw;
+    border: 2px solid #40E0D0;
+    margin: 5px;
+}
+
+.register_form {
+    width: 30vw;
+    border: 2px solid #40E0D0;
+    padding: 10px;
+    text-align: center;
+}
+
+.register_form input, button {
+    margin: 5px;
+}
+
+.App {
+    display: flex;
+    justify-content: center;
+}
