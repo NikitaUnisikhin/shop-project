@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login as auth_login
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from core.apps.accounts.forms import UserRegisterForm
 from .serializers import UserSerializer
 
@@ -38,8 +39,9 @@ def login(request):
         return Response('NO OK')
 
 
-@login_required
 @api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def profile(request):
     queryset = User.objects.get(id=request.user.id)
     serializer_for_queryset = UserSerializer(
