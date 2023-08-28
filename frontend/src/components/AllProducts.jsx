@@ -10,7 +10,7 @@ const AllProducts = () => {
             const products = await CatalogService.getAllProducts();
             setProducts(products.data);
         }
-        fetchProducts();
+        fetchProducts().then();
     }, []);
 
     return (
