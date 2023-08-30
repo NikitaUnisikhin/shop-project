@@ -14,6 +14,13 @@ export default class AccountsService {
         cookies.set("refresh", response.data['refresh'])
     }
 
+    static async logout() {
+        localStorage.removeItem("token");
+        return await instance.post('/api/token/blacklist/', {
+            "refresh": cookies.get("refresh")
+        });
+    }
+
     static async refresh() {
         return await instance.post('/api/token/refresh/', {
             "refresh": cookies.get("refresh")

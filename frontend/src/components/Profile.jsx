@@ -15,12 +15,16 @@ const Profile = () => {
         fetchProfile();
     }, []);
 
+    const logout = async (e) => {
+        await AccountsService.logout();
+    }
 
     return (
         <div className="profile">
             <div>
                 <div>Имя: {user.username}</div>
                 <div>Email: {user.email}</div>
+                <button onClick={logout}>Выйти из профиля</button>
             </div>
         </div>
     )

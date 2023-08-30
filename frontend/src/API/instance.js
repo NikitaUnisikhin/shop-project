@@ -6,14 +6,20 @@ export const instance = axios.create({
     withCredentials: true
 });
 
+instance.interceptors.request.use((config) => {
+    config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+    return config;
+})
+
 instance.interceptors.response.use((config) => {
     return config;
-    }, async (error) => {
+}, async (error) => {
     const originalRequest = error.config;
+    console.log(originalRequest._isRetry);
     if (
         error.response.status === 401 &&
         originalRequest &&
-        !originalRequest.hasOwnProperty('_isRetry')
+        !originalRequest._isRetry
     ) {
         originalRequest._isRetry = true;
         try {
