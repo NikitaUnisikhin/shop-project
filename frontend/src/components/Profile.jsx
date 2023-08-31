@@ -16,6 +16,7 @@ const Profile = () => {
     }, []);
 
     const logout = async (e) => {
+        e.preventDefault();
         await AccountsService.logout();
     }
 

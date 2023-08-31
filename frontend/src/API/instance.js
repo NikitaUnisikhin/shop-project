@@ -1,9 +1,14 @@
 import axios from "axios";
 import AccountsService from "./AccountsService";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies(null, { path: '/' });
+
+let isRetryRefresh = false;
 
 export const instance = axios.create({
     baseURL: "http://localhost:8000",
-    withCredentials: true
+    withCredentials: true,
 });
 
 instance.interceptors.request.use((config) => {
@@ -15,19 +20,17 @@ instance.interceptors.response.use((config) => {
     return config;
 }, async (error) => {
     const originalRequest = error.config;
-    console.log(originalRequest._isRetry);
     if (
         error.response.status === 401 &&
         originalRequest &&
-        !originalRequest._isRetry
+        !isRetryRefresh
     ) {
-        originalRequest._isRetry = true;
+        isRetryRefresh = true;
         try {
-            const response = await AccountsService.refresh();
+            const response = await AccountsService.refresh(cookies.get("refresh"));
             localStorage.setItem("token", response.data['access']);
             return instance.request(originalRequest);
         } catch (e) {
-            // TODO перенаправление на логин
             console.log('NO AUTH');
         }
     }

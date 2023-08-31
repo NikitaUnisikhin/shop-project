@@ -21,9 +21,9 @@ export default class AccountsService {
         });
     }
 
-    static async refresh() {
+    static async refresh(refresh) {
         return await instance.post('/api/token/refresh/', {
-            "refresh": cookies.get("refresh")
+            "refresh": refresh
         });
     }
 
