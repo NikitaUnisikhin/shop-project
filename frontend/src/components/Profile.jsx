@@ -1,14 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import AccountsService from "../API/AccountsService";
-import {AuthContext} from '../context/AuthContext';
 
 const Profile = () => {
     const [user, setUser] = useState({
         username: "",
         email: ""
     });
-
-    const {setIsAuth} = useContext(AuthContext);
 
     useEffect(() => {
         async function fetchProfile() {
@@ -20,7 +17,6 @@ const Profile = () => {
 
     const logout = async (e) => {
         e.preventDefault();
-        setIsAuth(false);
         localStorage.removeItem('isAuth');
         await AccountsService.logout();
     }

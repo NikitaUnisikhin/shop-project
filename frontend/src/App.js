@@ -1,29 +1,13 @@
 import './styles/App.css';
-import React from "react";
-import {AuthContext} from "./context/AuthContext";
-import {AppRouter} from './components/AppRouter'
 import {BrowserRouter} from "react-router-dom";
-import {useState, useEffect} from "react";
+import React from "react";
+import {AppRouter} from "./components/AppRouter";
 
 function App() {
-    const [isAuth, setIsAuth] = useState(false);
-
-    useEffect(() => {
-        if (localStorage.getItem('isAuth')) {
-            setIsAuth(true)
-        }
-    }, [])
-
-
     return (
-        <AuthContext.Provider value={{
-            isAuth,
-            setIsAuth
-        }}>
-            <BrowserRouter>
-                <AppRouter/>
-            </BrowserRouter>
-        </AuthContext.Provider>
+        <BrowserRouter>
+            <AppRouter/>
+        </BrowserRouter>
     );
 }
 

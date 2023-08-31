@@ -1,16 +1,22 @@
-import {AuthContext} from "../context/AuthContext";
-import {useContext} from "react";
+import {Route, Routes} from "react-router-dom";
+import React from "react";
 import {privateRoutes, publicRoutes} from "../router/routes";
-import {Route} from "react-router-dom";
 
 export const AppRouter = () => {
-    const {isAuth} = useContext(AuthContext);
+    const isAuth = localStorage.getItem('isAuth');
+
+    console.log(isAuth);
+
+    let routes;
+    if (isAuth) {
+        routes = publicRoutes.concat(privateRoutes);
+    } else {
+        routes = publicRoutes;
+    }
 
     return (
-        isAuth
-        ?
-        <AppRouter>
-            {privateRoutes.concat(publicRoutes).map(route => (
+        <Routes>
+            {routes.map(route => (
                 <Route
                     path={route.path}
                     element={route.element}
@@ -18,17 +24,6 @@ export const AppRouter = () => {
                     exact
                 />
             ))}
-        </AppRouter>
-            :
-        <AppRouter>
-            {publicRoutes.map(route => (
-                <Route
-                    path={route.path}
-                    element={route.element}
-                    key={route.path}
-                    exact
-                />
-            ))}
-        </AppRouter>
+        </Routes>
     )
 }

@@ -12,6 +12,7 @@ export default class AccountsService {
         let response = await instance.post('/api/token/', user);
         localStorage.setItem("token", response.data['access']);
         cookies.set("refresh", response.data['refresh'])
+        return response;
     }
 
     static async logout() {
