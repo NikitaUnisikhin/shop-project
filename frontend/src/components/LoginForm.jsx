@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import AccountsService from "../API/AccountsService";
+import {AuthContext} from '../context/AuthContext';
 
 const LoginForm = () => {
     const [user, setUser] = useState({
@@ -7,8 +8,12 @@ const LoginForm = () => {
         password: ""
     });
 
+    const {setIsAuth} = useContext(AuthContext);
+
     const loginUser = async (e) => {
         e.preventDefault();
+        setIsAuth(true);
+        localStorage.setItem('isAuth', 'true');
         await AccountsService.login(user);
         setUser({username: "", password: ""});
     }

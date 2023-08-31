@@ -1,23 +1,29 @@
 import './styles/App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Home from './pages/Home'
-import ProductCart from './pages/ProductCart';
 import React from "react";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import ProfileCart from "./pages/ProfileCart";
+import {AuthContext} from "./context/AuthContext";
+import {AppRouter} from './components/AppRouter'
+import {BrowserRouter} from "react-router-dom";
+import {useState, useEffect} from "react";
 
 function App() {
+    const [isAuth, setIsAuth] = useState(false);
+
+    useEffect(() => {
+        if (localStorage.getItem('isAuth')) {
+            setIsAuth(true)
+        }
+    }, [])
+
+
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route exact path="/home" element={<Home/>}/>
-                <Route exact path="/products/:id" element={<ProductCart/>}/>
-                <Route exact path="/register" element={<Register/>}/>
-                <Route exact path="/login" element={<Login/>}/>
-                <Route exact path="/profile" element={<ProfileCart/>}/>
-            </Routes>
-        </BrowserRouter>
+        <AuthContext.Provider value={{
+            isAuth,
+            setIsAuth
+        }}>
+            <BrowserRouter>
+                <AppRouter/>
+            </BrowserRouter>
+        </AuthContext.Provider>
     );
 }
 
